@@ -1,0 +1,59 @@
+PYQR - A pure Python QR-Code Generator
+--------------------------------------------------------------------------------
+Author : Hans Christian von Stockhausen [hc at vst dot io]
+Date   : 2010-08-09
+Web    : http://QR-CODE.co.za
+         http://twitter.com/photocode
+         http://github.com/hcvst/pyqr
+--------------------------------------------------------------------------------
+
+This is a pre alpha release /!\
+
+One can generate the following codes: 1-M, 1-H, 2-L, 3-L 
+Alphanumeric and binary encoding are supported. Note, that alphanumeric mode is 
+NOT casesensitive.
+
+EXAMPLES
+========
+To save a qr code to file.
+>>> import qrcode
+>>> qrc = qrcode.QRCode() 
+>>> qrc.encode("HTTP://QR-CODE.CO.ZA") 
+>>> img = qrc.to_image()
+>>> img.save('./code.png')
+
+To display a qr code as text. 
+>>> import qrcode
+>>> qrc = qrcode.QRCode() 
+>>> qrc.encode("HTTP://QR-CODE.CO.ZA")
+>>> s = qrc.to_string(on='g') # g rendered as black box when font set to Webdings
+>>> print(s)
+
+TODO
+====
+* update testcases
+* clean up, refactor rewrite
+  * validate input lengths
+  * encapsule the various specification tables
+  * look into the bitlist helper
+  * use appends instead of concats with lists
+* make code more robust or at least crash rather than producing garbage
+* optimal mask selection (currently 011 is used)
+* add support for version > 3
+* automatically select version that best fits data if none specified
+* add support for microqr
+
+LIMITATIONS
+===========
+Too many to list
+
+KNOWN ISSUES
+============
+Generating a 1-M for too long input results in a code that crashes the Android barcode
+scanner. Probably due to some incorrect padding (0000 and 236,17) on my side.
+
+
+COPYRIGHT & LICENSE
+===================
+The file ffield.py is copyright Emin Martinian, 2002. See ffield.py for license terms.
+All other files are copyright Hans Christian von Stockhausen, 2010. See LICENSE file for terms.
